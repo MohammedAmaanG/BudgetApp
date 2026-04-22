@@ -46,7 +46,7 @@ fun OverviewScreen(
             TopAppBar(
                 title = {
                     Column {
-                        Text("FinWise", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
+                        Text("BudgetApp", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
                         Text(now.format(monthFmt), style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(0.6f))
                     }

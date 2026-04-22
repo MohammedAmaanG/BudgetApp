@@ -58,7 +58,7 @@ fun LoginScreen(
             Text("💰", fontSize = 56.sp)
             Spacer(Modifier.height(8.dp))
             Text(
-                text       = "FinWise",
+                text       = "BudgetApp",
                 style      = MaterialTheme.typography.displayLarge,
                 color      = MaterialTheme.colorScheme.onPrimary,
                 fontWeight = FontWeight.ExtraBold
