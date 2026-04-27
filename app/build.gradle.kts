@@ -10,10 +10,13 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)   // Required by Room annotation processor (KSP replaces KAPT)
 }
 
 android {
     namespace = "com.prog7313.budgetapp"
+    // compileSdk 34 matches AGP 8.5.0 — avoids the "tested up to 34" warning.
+    // To use 35 anyway, add:  android.suppressUnsupportedCompileSdk=35  in gradle.properties
     compileSdk = 34
 
     defaultConfig {
@@ -85,6 +88,14 @@ dependencies {
     // Navigation
     implementation(libs.navigation.compose)
 
+    // ── Room — local SQLite database for Part 2 ───────────────────────────────
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)          // suspend + Flow support for Room DAOs
+    ksp(libs.room.compiler)                // KSP annotation processor (replaces kapt)
+
+
+    // ── HTTP: Retrofit + OkHttp (used for BOTH Supabase REST AND Airtable) ──
+    // No Supabase Kotlin SDK needed — we call Supabase's REST API directly
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logging)

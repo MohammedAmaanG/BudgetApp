@@ -4,44 +4,67 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.prog7313.budgetapp.ui.theme.BudgetAppTheme
+import androidx.activity.viewModels
+import androidx.compose.runtime.getValue
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.prog7313.budgetapp.ui.navigation.AppNavHost
+import com.prog7313.budgetapp.ui.theme.Application001Theme
+import com.prog7313.budgetapp.viewmodel.AppViewModel
+import com.prog7313.budgetapp.viewmodel.AuthViewModel
+
 
 class MainActivity : ComponentActivity() {
+
+    private val authViewModel: AuthViewModel by viewModels()
+    private val appViewModel:  AppViewModel  by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        splashScreen.setKeepOnScreenCondition {
+            authViewModel.uiState.value.isLoading
+        }
+
         setContent {
-            BudgetAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Application001Theme {
+                val authState by authViewModel.uiState.collectAsStateWithLifecycle()
+
+                AppNavHost(
+                    authViewModel = authViewModel,
+                    appViewModel  = appViewModel,
+                    isLoggedIn    = authState.isLoggedIn
+                )
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+/*
+Title: Jetpack Compose — Single-Activity architecture
+Author(s): Android Developers
+Date: 2024
+Version: Activity Compose 1.9.0
+Type: Documentation
+Availability: https://developer.android.com/develop/ui/compose/migrate/activity
+*/
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BudgetAppTheme {
-        Greeting("Android")
-    }
-}
+/*
+Title: ViewModelProvider.AndroidViewModelFactory — Supplying Application to ViewModel
+Author(s): Android Developers
+Date: 2024
+Version: Lifecycle 2.8.2
+Type: Documentation
+Availability: https://developer.android.com/reference/androidx/lifecycle/ViewModelProvider.AndroidViewModelFactory
+*/
+
+/*
+Title: Android — SplashScreen API
+Author(s): Android Developers
+Date: 2024
+Version: Core SplashScreen 1.0.1
+Type: Documentation
+Availability: https://developer.android.com/develop/ui/views/launch/splash-screen
+*/
