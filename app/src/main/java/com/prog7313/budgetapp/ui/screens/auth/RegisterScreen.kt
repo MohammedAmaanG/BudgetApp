@@ -50,7 +50,7 @@ fun RegisterScreen(
             Text("💰", fontSize = 48.sp)
             Spacer(Modifier.height(4.dp))
             Text(
-                text  = "FinWise",
+                text  = "BudgetApp",
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontWeight = FontWeight.ExtraBold

@@ -1,15 +1,15 @@
-package com.prog7313.application001.data.repository
+package com.prog7313.budgetapp.data.repository
 
 import android.util.Log
-import com.prog7313.application001.data.model.Category
-import com.prog7313.application001.data.model.DailySpending
-import com.prog7313.application001.data.model.Expense
-import com.prog7313.application001.data.remote.AirtableClient
-import com.prog7313.application001.data.remote.AirtableCreateRequest
-import com.prog7313.application001.data.remote.AirtableRecordRequest
-import com.prog7313.application001.data.remote.SupabaseSession
-import com.prog7313.application001.data.remote.supabaseDbApi
-import com.prog7313.application001.data.remote.uploadToStorage
+import com.prog7313.budgetapp.data.model.Category
+import com.prog7313.budgetapp.data.model.DailySpending
+import com.prog7313.budgetapp.data.model.Expense
+import com.prog7313.budgetapp.data.remote.AirtableClient
+import com.prog7313.budgetapp.data.remote.AirtableCreateRequest
+import com.prog7313.budgetapp.data.remote.AirtableRecordRequest
+import com.prog7313.budgetapp.data.remote.SupabaseSession
+import com.prog7313.budgetapp.data.remote.supabaseDbApi
+import com.prog7313.budgetapp.data.remote.uploadToStorage
 import java.io.File
 
 private const val TAG = "ExpenseRepository"
@@ -18,7 +18,6 @@ private const val TAG = "ExpenseRepository"
 class ExpenseRepository {
 
     private val userId get() = SupabaseSession.userId
-
 
     suspend fun getCategories(): Result<List<Category>> = try {
         val resp = supabaseDbApi.getCategories(userIdFilter = "eq.$userId")
@@ -55,7 +54,6 @@ class ExpenseRepository {
         fromDate: String? = null,
         toDate: String? = null
     ): Result<List<Expense>> = try {
-
         val dateFilters = buildList {
             if (fromDate != null) add("gte.$fromDate")
             if (toDate   != null) add("lte.$toDate")
@@ -109,7 +107,6 @@ class ExpenseRepository {
         Log.e(TAG, "deleteExpense failed", e); Result.failure(e)
     }
 
-
     suspend fun getDailySpending(from: String, to: String): Result<List<DailySpending>> =
         getExpenses(from, to).map { list ->
             list.groupBy { it.date }
@@ -122,7 +119,6 @@ class ExpenseRepository {
             list.groupBy { it.categoryId }
                 .mapValues { (_, v) -> v.sumOf { it.amount } }
         }
-
 
     suspend fun uploadReceipt(expenseId: String, imageFile: File): Result<String> =
         uploadToStorage("receipts", "$userId/$expenseId.jpg", imageFile.readBytes())

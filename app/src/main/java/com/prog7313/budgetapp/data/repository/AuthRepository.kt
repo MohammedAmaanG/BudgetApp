@@ -1,12 +1,11 @@
-package com.prog7313.application001.data.repository
+package com.prog7313.budgetapp.data.repository
 
 import android.util.Log
-import com.prog7313.application001.data.remote.AuthRequest
-import com.prog7313.application001.data.remote.SupabaseSession
-import com.prog7313.application001.data.remote.supabaseAuthApi
+import com.prog7313.budgetapp.data.remote.AuthRequest
+import com.prog7313.budgetapp.data.remote.SupabaseSession
+import com.prog7313.budgetapp.data.remote.supabaseAuthApi
 
 private const val TAG = "AuthRepository"
-
 
 class AuthRepository {
 
@@ -29,9 +28,7 @@ class AuthRepository {
                     Log.i(TAG, "Registered: $userId")
                     Result.success(userId)
                 } else {
-                    // Supabase may require email confirmation — token is null
-                    // In that case, registration succeeded but auto-login didn't happen
-                    Log.i(TAG, "Registration submitted (email confirmation may be required)")
+                   Log.i(TAG, "Registration submitted (email confirmation may be required)")
                     Result.success("pending_confirmation")
                 }
             } else {
@@ -44,7 +41,6 @@ class AuthRepository {
             Result.failure(e)
         }
     }
-
 
     suspend fun login(userEmail: String, userPassword: String): Result<String> {
         return try {
@@ -73,7 +69,6 @@ class AuthRepository {
         }
     }
 
-
     suspend fun logout(): Result<Unit> {
         return try {
             supabaseAuthApi.signOut()
@@ -87,7 +82,10 @@ class AuthRepository {
         }
     }
 
+
+
     fun restoreSession(): Boolean = SupabaseSession.isLoggedIn
+
     private fun parseSupabaseError(body: String?, code: Int): String {
         if (body == null) return "Request failed (HTTP $code)"
         return try {
