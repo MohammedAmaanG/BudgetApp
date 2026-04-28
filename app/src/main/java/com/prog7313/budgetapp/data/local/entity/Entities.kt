@@ -1,4 +1,4 @@
-package com.prog7313.application001.data.local.entity
+package com.prog7313.budgetapp.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

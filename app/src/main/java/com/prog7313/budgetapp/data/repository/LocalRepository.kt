@@ -12,14 +12,14 @@ import java.time.format.DateTimeFormatter
 
 private const val TAG = "LocalRepositories"
 
+
 class LocalExpenseRepository(context: Context) {
 
     private val db          = AppDatabase.getInstance(context)
     private val categoryDao = db.categoryDao()
     private val expenseDao  = db.expenseDao()
 
-    // The local user ID is set by LocalAuthRepository on login.
-    // We read it from LocalUserSession rather than Supabase.
+
     private val userId get() = LocalUserSession.userId
 
 
@@ -52,7 +52,6 @@ class LocalExpenseRepository(context: Context) {
     Type: Documentation
     Availability: https://developer.android.com/training/data-storage/room/inserting-data
     */
-
 
     suspend fun getExpenses(
         fromDate: String? = null,
@@ -111,11 +110,7 @@ class LocalExpenseRepository(context: Context) {
     */
 
 
-    /**
-     * Copies the receipt image to the app's internal files directory and stores
-     * the local file path in the database as the receipt URL.
-     * In Part 3 (Supabase), this is replaced with a proper cloud upload.
-     */
+
     suspend fun saveReceiptLocally(expenseId: String, imageFile: File): Result<String> = try {
         val dir  = File(imageFile.parentFile, "receipts").also { it.mkdirs() }
         val dest = File(dir, "$expenseId.jpg")
@@ -242,6 +237,7 @@ class LocalRecurringRepository(context: Context) {
             }
         }
 }
+
 
 
 object LocalUserSession {

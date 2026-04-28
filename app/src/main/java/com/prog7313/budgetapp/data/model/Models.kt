@@ -8,7 +8,6 @@ import kotlinx.serialization.Serializable
 
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
 
-//  Supabase table: categories
 @Serializable
 data class Category(
     val id: String = "",
@@ -20,16 +19,7 @@ data class Category(
     @SerialName("created_at")    val createdAt: String = ""
 )
 
-/*
-Title: Kotlinx Serialization — SerialName annotation
-Author(s): JetBrains
-Date: 2024
-Version: 1.6.3
-Type: Documentation
-Availability: https://kotlinlang.org/docs/serialization.html
-*/
 
-//  Supabase table: expenses
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable
 data class Expense(
@@ -43,7 +33,7 @@ data class Expense(
     @SerialName("created_at")    val createdAt: String = ""
 )
 
-//  Supabase table: budget_goals
+
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable
 data class BudgetGoal(
@@ -57,7 +47,7 @@ data class BudgetGoal(
     @SerialName("created_at")    val createdAt: String = ""
 )
 
-//  Supabase table: savings_goals  (extra feature 1)
+
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable
 data class SavingsGoal(
@@ -71,14 +61,14 @@ data class SavingsGoal(
     val color: String = "#4CAF50",
     @SerialName("created_at")       val createdAt: String = ""
 ) {
-    /** Progress as 0.0 – 1.0 */
+
     val progress: Float get() =
         if (targetAmount <= 0) 0f else (currentAmount / targetAmount).toFloat().coerceIn(0f, 1f)
     val progressPercent: Int get() = (progress * 100).toInt()
     val isCompleted: Boolean get() = currentAmount >= targetAmount
 }
 
-//  Supabase table: recurring_transactions  (extra feature 2)
+
 @SuppressLint("UnsafeOptInUsageError")
 @Serializable
 data class RecurringTransaction(
@@ -101,7 +91,6 @@ data class RecurringTransaction(
     }
 }
 
-//  UI helper models (not persisted directly)
 
 data class CategoryWithSpending(
     val category: Category,
@@ -116,7 +105,7 @@ data class DailySpending(
     val totalAmount: Double
 )
 
-// Gamification badge model
+
 data class Badge(
     val id: String,
     val title: String,
@@ -125,7 +114,7 @@ data class Badge(
     val isEarned: Boolean = false
 )
 
-// Predefined badges
+
 object Badges {
     val all = listOf(
         Badge("first_expense",   "First Step",       "Log your first expense",          "🌱"),
@@ -138,16 +127,7 @@ object Badges {
     )
 }
 
-/*
-Title: Gamification in personal finance apps: a study of user engagement
-Author(s): Hamari, J., Koivisto, J.
-Date: 2015
-Version: N/A
-Type: Journal Article
-Availability: https://doi.org/10.1016/j.chb.2015.04.042
-*/
 
-// Sealed class for screen navigation routes
 sealed class Screen(val route: String) {
     object Login          : Screen("login")
     object Register       : Screen("register")
@@ -160,12 +140,3 @@ sealed class Screen(val route: String) {
     object Subscriptions  : Screen("subscriptions")
     object AddSavingsGoal : Screen("add_savings_goal")
 }
-
-/*
-Title: Navigate with Compose — Sealed class route destinations
-Author(s): Android Developers
-Date: 2024
-Version: Navigation Compose 2.7.7
-Type: Documentation
-Availability: https://developer.android.com/develop/ui/compose/navigation
-*/

@@ -13,7 +13,6 @@ import com.prog7313.budgetapp.ui.theme.Application001Theme
 import com.prog7313.budgetapp.viewmodel.AppViewModel
 import com.prog7313.budgetapp.viewmodel.AuthViewModel
 
-
 class MainActivity : ComponentActivity() {
 
     private val authViewModel: AuthViewModel by viewModels()

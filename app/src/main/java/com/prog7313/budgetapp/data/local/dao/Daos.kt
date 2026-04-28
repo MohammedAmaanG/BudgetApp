@@ -1,17 +1,15 @@
 package com.prog7313.budgetapp.data.local.dao
 
+
 import androidx.room.*
 import com.prog7313.budgetapp.data.local.entity.*
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface CategoryDao {
 
-    /** Returns a Flow so the UI automatically updates when categories change. */
     @Query("SELECT * FROM categories WHERE user_id = :userId ORDER BY name ASC")
     fun getCategoriesFlow(userId: String): Flow<List<CategoryEntity>>
-
 
     @Query("SELECT * FROM categories WHERE user_id = :userId ORDER BY name ASC")
     suspend fun getCategories(userId: String): List<CategoryEntity>
@@ -45,9 +43,6 @@ Type: Documentation
 Availability: https://developer.android.com/training/data-storage/room/inserting-data
 */
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  ExpenseDao
-// ─────────────────────────────────────────────────────────────────────────────
 
 @Dao
 interface ExpenseDao {
@@ -96,7 +91,6 @@ Type: Documentation
 Availability: https://developer.android.com/training/data-storage/room/async-queries#flow
 */
 
-
 @Dao
 interface BudgetGoalDao {
 
@@ -107,11 +101,7 @@ interface BudgetGoalDao {
     """)
     suspend fun getBudgetGoal(userId: String, month: Int, year: Int): BudgetGoalEntity?
 
-    /**
-     * REPLACE acts as upsert: if a goal for the same user/month/year already
-     * exists (same id), it is overwritten. If the id changes (new insert), it
-     * is inserted fresh.
-     */
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertBudgetGoal(goal: BudgetGoalEntity)
 }
@@ -125,9 +115,6 @@ Type: Documentation
 Availability: https://developer.android.com/reference/androidx/room/OnConflictStrategy
 */
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  SavingsGoalDao
-// ─────────────────────────────────────────────────────────────────────────────
 
 @Dao
 interface SavingsGoalDao {
@@ -157,9 +144,6 @@ Type: Documentation
 Availability: https://developer.android.com/training/data-storage/room/updating-data
 */
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  RecurringTransactionDao
-// ─────────────────────────────────────────────────────────────────────────────
 
 @Dao
 interface RecurringTransactionDao {

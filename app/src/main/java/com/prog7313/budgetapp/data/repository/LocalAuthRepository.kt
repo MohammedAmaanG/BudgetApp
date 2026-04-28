@@ -15,7 +15,6 @@ import java.util.UUID
 
 private const val TAG = "LocalAuthRepository"
 
-
 @Entity(tableName = "users")
 data class UserEntity(
     @PrimaryKey
@@ -55,14 +54,17 @@ Availability: https://developer.android.com/training/data-storage/room/accessing
 
 class LocalAuthRepository(private val context: Context) {
 
+
     private val userDao: UserDao by lazy {
         AppDatabase.getInstance(context).let {
+
             it.userDao()
         }
     }
 
     val currentUserId: String get() = LocalUserSession.userId
     val isLoggedIn: Boolean   get() = LocalUserSession.isLoggedIn
+
 
 
     suspend fun register(userEmail: String, userPassword: String): Result<String> {
@@ -83,6 +85,7 @@ class LocalAuthRepository(private val context: Context) {
             Result.failure(Exception("Registration failed: ${e.message}"))
         }
     }
+
 
     suspend fun login(userEmail: String, userPassword: String): Result<String> {
         return try {
@@ -107,6 +110,7 @@ class LocalAuthRepository(private val context: Context) {
         Log.i(TAG, "Local session cleared")
         return Result.success(Unit)
     }
+
 
     fun restoreSession(): Boolean = LocalUserSession.isLoggedIn
 

@@ -32,6 +32,7 @@ object SupabaseSession {
     fun clear() { accessToken = ""; userId = ""; userEmail = "" }
 }
 
+
 data class AuthRequest(val email: String, val password: String)
 
 data class AuthResponse(
@@ -51,6 +52,7 @@ data class UserDto(
 data class SavingsAmountUpdate(val currentAmount: Double)
 data class ActiveUpdate(val isActive: Boolean)
 
+
 interface SupabaseAuthApi {
     @POST("auth/v1/signup")
     suspend fun signUp(@Body body: AuthRequest): Response<AuthResponse>
@@ -67,6 +69,7 @@ interface SupabaseAuthApi {
 
 
 interface SupabaseDbApi {
+
 
     @GET("rest/v1/categories")
     suspend fun getCategories(
@@ -85,6 +88,7 @@ interface SupabaseDbApi {
         @Query("id")      idFilter: String,
         @Query("user_id") userIdFilter: String
     ): Response<Void>
+
 
     @GET("rest/v1/expenses")
     suspend fun getExpenses(
@@ -120,11 +124,14 @@ interface SupabaseDbApi {
         @Query("year")    yearFilter: String? = null
     ): Response<List<BudgetGoal>>
 
+
     @POST("rest/v1/budget_goals")
     suspend fun upsertBudgetGoal(
         @Body body: BudgetGoal,
         @Header("Prefer") prefer: String = "return=representation,resolution=merge-duplicates"
     ): Response<List<BudgetGoal>>
+
+
 
     @GET("rest/v1/savings_goals")
     suspend fun getSavingsGoals(
@@ -151,6 +158,7 @@ interface SupabaseDbApi {
         @Query("id")      idFilter: String,
         @Query("user_id") userIdFilter: String
     ): Response<Void>
+
 
 
     @GET("rest/v1/recurring_transactions")
@@ -192,6 +200,7 @@ private val gson by lazy {
         .create()
 }
 
+
 val sharedOkHttpClient: OkHttpClient by lazy {
     OkHttpClient.Builder()
         .addInterceptor { chain ->
@@ -212,6 +221,7 @@ val sharedOkHttpClient: OkHttpClient by lazy {
         .build()
 }
 
+
 private val retrofit: Retrofit by lazy {
     Retrofit.Builder()
         .baseUrl("${BuildConfig.SUPABASE_URL}/")
@@ -220,9 +230,9 @@ private val retrofit: Retrofit by lazy {
         .build()
 }
 
-
 val supabaseAuthApi: SupabaseAuthApi by lazy { retrofit.create(SupabaseAuthApi::class.java) }
 val supabaseDbApi:   SupabaseDbApi   by lazy { retrofit.create(SupabaseDbApi::class.java) }
+
 
 suspend fun uploadToStorage(bucket: String, path: String, imageBytes: ByteArray): Result<String> {
     return withContext(Dispatchers.IO) {

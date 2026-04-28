@@ -1,6 +1,5 @@
 package com.prog7313.budgetapp.data.repository
 
-
 import android.util.Log
 import com.prog7313.budgetapp.data.model.BudgetGoal
 import com.prog7313.budgetapp.data.model.RecurringTransaction
@@ -11,7 +10,6 @@ import com.prog7313.budgetapp.data.remote.SupabaseSession
 import com.prog7313.budgetapp.data.remote.supabaseDbApi
 
 private const val TAG = "Repositories"
-
 
 class BudgetRepository {
 
@@ -42,6 +40,7 @@ class BudgetRepository {
     }
 }
 
+
 class SavingsRepository {
 
     private val userId get() = SupabaseSession.userId
@@ -68,6 +67,7 @@ class SavingsRepository {
 
     suspend fun addContribution(goalId: String, amount: Double): Result<SavingsGoal> {
         return try {
+            // Fetch current first, then apply the delta
             val currentResp = supabaseDbApi.getSavingsGoals(userIdFilter = "eq.$userId")
             val current = currentResp.body()?.find { it.id == goalId }
                 ?: return Result.failure(Exception("Goal not found"))
@@ -98,7 +98,6 @@ class SavingsRepository {
         Log.e(TAG, "deleteSavingsGoal failed", e); Result.failure(e)
     }
 }
-
 
 class RecurringRepository {
 

@@ -19,6 +19,7 @@ class ExpenseRepository {
 
     private val userId get() = SupabaseSession.userId
 
+
     suspend fun getCategories(): Result<List<Category>> = try {
         val resp = supabaseDbApi.getCategories(userIdFilter = "eq.$userId")
         if (resp.isSuccessful) Result.success(resp.body() ?: emptyList())
@@ -49,6 +50,7 @@ class ExpenseRepository {
     } catch (e: Exception) {
         Log.e(TAG, "deleteCategory failed", e); Result.failure(e)
     }
+
 
     suspend fun getExpenses(
         fromDate: String? = null,
@@ -107,6 +109,7 @@ class ExpenseRepository {
         Log.e(TAG, "deleteExpense failed", e); Result.failure(e)
     }
 
+
     suspend fun getDailySpending(from: String, to: String): Result<List<DailySpending>> =
         getExpenses(from, to).map { list ->
             list.groupBy { it.date }
@@ -120,8 +123,10 @@ class ExpenseRepository {
                 .mapValues { (_, v) -> v.sumOf { it.amount } }
         }
 
+
     suspend fun uploadReceipt(expenseId: String, imageFile: File): Result<String> =
         uploadToStorage("receipts", "$userId/$expenseId.jpg", imageFile.readBytes())
+
 
     private suspend fun syncToAirtable(expense: Expense) {
         try {

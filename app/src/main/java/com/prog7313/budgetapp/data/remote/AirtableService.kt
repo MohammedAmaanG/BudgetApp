@@ -42,7 +42,6 @@ data class AirtableUpdateRequest(
 
 interface AirtableService {
 
-
     @GET("{baseId}/{table}")
     suspend fun listRecords(
         @Path("baseId")  baseId: String,
@@ -51,12 +50,15 @@ interface AirtableService {
         @Query("maxRecords") maxRecords: Int = 100
     ): Response<AirtableListResponse>
 
+
     @POST("{baseId}/{table}")
     suspend fun createRecords(
         @Path("baseId") baseId: String,
         @Path("table")  table: String,
         @Body body: AirtableCreateRequest
     ): Response<AirtableListResponse>
+
+
     @PATCH("{baseId}/{table}/{recordId}")
     suspend fun updateRecord(
         @Path("baseId")   baseId: String,
@@ -66,6 +68,7 @@ interface AirtableService {
     ): Response<AirtableRecord>
 }
 
+
 object AirtableClient {
 
     private const val BASE_URL = "https://api.airtable.com/v0/"
@@ -73,6 +76,7 @@ object AirtableClient {
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .addInterceptor { chain ->
+
                 val request = chain.request().newBuilder()
                     .addHeader("Authorization", "Bearer ${BuildConfig.AIRTABLE_API_KEY}")
                     .addHeader("Content-Type",  "application/json")
@@ -97,6 +101,7 @@ object AirtableClient {
             .build()
             .create(AirtableService::class.java)
     }
+
 
     val baseId: String get() = BuildConfig.AIRTABLE_BASE_ID
 }

@@ -35,7 +35,6 @@ Type: Documentation
 Availability: https://developer.android.com/topic/architecture/data-layer#data-layer-best-practices
 */
 
-// ── Expense ───────────────────────────────────────────────────────────────────
 
 fun ExpenseEntity.toDomain() = Expense(
     id          = id,

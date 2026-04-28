@@ -9,19 +9,6 @@ import com.prog7313.budgetapp.data.local.entity.*
 import com.prog7313.budgetapp.data.repository.UserDao
 import com.prog7313.budgetapp.data.repository.UserEntity
 
-/**
- * AppDatabase — the single Room database for the FinWise app (Part 2).
- *
- * Tables:
- *   users                    — local auth (Part 2 only)
- *   categories               — expense categories
- *   expenses                 — individual expense entries
- *   budget_goals             — monthly min/max/total budget
- *   savings_goals            — savings targets with progress
- *   recurring_transactions   — subscriptions and fixed costs
- *
- * Version: 1 (initial Part 2 schema)
- */
 @Database(
     entities = [
         UserEntity::class,
@@ -48,10 +35,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        /**
-         * Returns the singleton database instance.
-         * Creates it if it does not exist using double-checked locking.
-         */
         fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
