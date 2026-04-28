@@ -151,7 +151,7 @@ fun OverviewScreen(
                         .padding(horizontal = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    com.prog7313.application001.data.model.Badges.all.forEach { badge ->
+                    com.prog7313.budgetapp.data.model.Badges.all.forEach { badge ->
                         BadgeCard(badge.icon, badge.title, badges.any { it.id == badge.id })
                     }
                 }
@@ -214,7 +214,7 @@ fun OverviewScreen(
 }
 
 @Composable
-private fun RecentExpenseRow(expense: Expense, category: com.prog7313.application001.data.model.Category?) {
+private fun RecentExpenseRow(expense: Expense, category: com.prog7313.budgetapp.data.model.Category?) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

@@ -196,7 +196,7 @@ private fun RecurringRow(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddRecurringDialog(
-    categories: List<com.prog7313.application001.data.model.Category>,
+    categories: List<com.prog7313.budgetapp.data.model.Category>,
     onDismiss: () -> Unit,
     onSave: (name: String, amount: Double, freq: String, catId: String, nextDate: String, icon: String) -> Unit
 ) {

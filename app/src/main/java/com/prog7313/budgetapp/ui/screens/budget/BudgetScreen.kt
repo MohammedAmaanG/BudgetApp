@@ -196,7 +196,7 @@ private fun CategoryBudgetRow(item: CategoryWithSpending, onDelete: () -> Unit) 
 
 @Composable
 private fun SetBudgetDialog(
-    existing: com.prog7313.application001.data.model.BudgetGoal?,
+    existing: com.prog7313.budgetapp.data.model.BudgetGoal?,
     onDismiss: () -> Unit,
     onSave: (min: Double, max: Double, total: Double) -> Unit
 ) {
@@ -239,7 +239,7 @@ private fun AddCategoryDialog(
     var color   by remember { mutableStateOf("#4A90D9") }
     var limit   by remember { mutableStateOf("") }
     val icons   = listOf("💰","🛒","🍔","🚗","🏠","🎮","✈️","💊","📚","🎵","👗","⚡")
-    val colors  = com.prog7313.application001.ui.theme.CategoryColors
+    val colors  = com.prog7313.budgetapp.ui.theme.CategoryColors
 
     AlertDialog(
         onDismissRequest = onDismiss,
