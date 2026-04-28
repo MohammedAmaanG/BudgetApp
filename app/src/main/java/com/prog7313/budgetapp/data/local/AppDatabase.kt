@@ -1,13 +1,13 @@
-package com.prog7313.application001.data.local
+package com.prog7313.budgetapp.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.prog7313.application001.data.local.dao.*
-import com.prog7313.application001.data.local.entity.*
-import com.prog7313.application001.data.repository.UserDao
-import com.prog7313.application001.data.repository.UserEntity
+import com.prog7313.budgetapp.data.local.dao.*
+import com.prog7313.budgetapp.data.local.entity.*
+import com.prog7313.budgetapp.data.repository.UserDao
+import com.prog7313.budgetapp.data.repository.UserEntity
 
 /**
  * AppDatabase — the single Room database for the FinWise app (Part 2).

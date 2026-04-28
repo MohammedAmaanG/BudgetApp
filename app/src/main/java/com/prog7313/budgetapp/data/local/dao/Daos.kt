@@ -1,12 +1,9 @@
-package com.prog7313.application001.data.local.dao
+package com.prog7313.budgetapp.data.local.dao
 
 import androidx.room.*
-import com.prog7313.application001.data.local.entity.*
+import com.prog7313.budgetapp.data.local.entity.*
 import kotlinx.coroutines.flow.Flow
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  CategoryDao
-// ─────────────────────────────────────────────────────────────────────────────
 
 @Dao
 interface CategoryDao {
@@ -15,14 +12,11 @@ interface CategoryDao {
     @Query("SELECT * FROM categories WHERE user_id = :userId ORDER BY name ASC")
     fun getCategoriesFlow(userId: String): Flow<List<CategoryEntity>>
 
-    /** One-shot suspend query (used in repositories). */
+
     @Query("SELECT * FROM categories WHERE user_id = :userId ORDER BY name ASC")
     suspend fun getCategories(userId: String): List<CategoryEntity>
 
-    /**
-     * REPLACE conflict strategy: if a row with the same id already exists,
-     * it is deleted and re-inserted with the new values (acts as upsert).
-     */
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategory(category: CategoryEntity)
 
@@ -102,9 +96,6 @@ Type: Documentation
 Availability: https://developer.android.com/training/data-storage/room/async-queries#flow
 */
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  BudgetGoalDao
-// ─────────────────────────────────────────────────────────────────────────────
 
 @Dao
 interface BudgetGoalDao {

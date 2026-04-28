@@ -1,4 +1,4 @@
-package com.prog7313.application001.data.repository
+package com.prog7313.budgetapp.data.repository
 
 import android.content.Context
 import android.util.Log
@@ -9,7 +9,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
-import com.prog7313.application001.data.local.AppDatabase
+import com.prog7313.budgetapp.data.local.AppDatabase
 import java.security.MessageDigest
 import java.util.UUID
 

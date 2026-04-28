@@ -1,19 +1,10 @@
-package com.prog7313.application001.data.local
+package com.prog7313.budgetapp.data.local
 
-import com.prog7313.application001.data.local.entity.*
-import com.prog7313.application001.data.model.*
+import com.prog7313.budgetapp.data.local.entity.*
+import com.prog7313.budgetapp.data.model.*
 import java.util.UUID
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  Mapper functions: Entity ↔ Domain Model
-//
-//  The app uses one set of domain models (in data.model) for both Room and
-//  Supabase. These mappers translate between the Room entity classes and the
-//  shared domain models so the ViewModel and UI never need to know which
-//  storage backend is active.
-// ─────────────────────────────────────────────────────────────────────────────
 
-// ── Category ──────────────────────────────────────────────────────────────────
 
 fun CategoryEntity.toDomain() = Category(
     id          = id,

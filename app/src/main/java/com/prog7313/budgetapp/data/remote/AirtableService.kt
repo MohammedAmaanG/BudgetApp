@@ -1,6 +1,6 @@
 package com.prog7313.budgetapp.data.remote
 
-import com.prog7313.application001.BuildConfig
+import com.prog7313.budgetapp.BuildConfig
 import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

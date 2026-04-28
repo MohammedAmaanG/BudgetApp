@@ -1,8 +1,8 @@
 package com.prog7313.budgetapp.data.remote
 
 import android.util.Log
-import com.prog7313.application001.BuildConfig
-import com.prog7313.application001.data.model.*
+import com.prog7313.budgetapp.BuildConfig
+import com.prog7313.budgetapp.data.model.*
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.FieldNamingPolicy

@@ -43,7 +43,7 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun Application001Theme(
-    darkTheme: Boolean = false,   // Default to light theme matching the screenshots
+    darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
