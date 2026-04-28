@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme - used before Compose takes over -->
+    <!-- Base application theme -->
     <style name="Theme.budgetapp" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:statusBarColor">@android:color/white</item>
     </style>
 
-    <!-- Splash screen theme - extends the Material splash screen component -->
+    <!--
+        Splash screen theme.
+        windowSplashScreenAnimatedIcon points to the real app logo (ic_app_logo).
+        The logo is displayed centred on the DarkNavy (#1A2332) background.
+    -->
     <style name="Theme.budgetapp.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#1A2332</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
+        <item name="windowSplashScreenIconBackgroundColor">#1A2332</item>
         <item name="postSplashScreenTheme">@style/Theme.budgetapp</item>
     </style>
 </resources>
