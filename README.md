@@ -39,10 +39,3 @@ Vico — animated, Material 3 compatible charts
 Coil — async image loading for receipts
 Retrofit — Airtable REST API calls
 Accompanist Permissions — runtime camera permission handling
-
-
-Features
-FeatureScreenStatusRegister / Login with email+passwordAuth screens✅Create expense categories with icon + colorBudget screen✅Add expenses with amount, date, description, categoryAdd Expense✅Attach receipt photo (camera or gallery)Add Expense✅Set monthly budget (min/max/total)Budget screen✅View expenses filtered by date rangeTransactions✅View receipt photo from transaction listTransactions✅View total spent per categoryAnalyze / Budget✅Daily spending bar chart (Vico)Analyze screen✅Category spending bar chartAnalyze screen✅Visual budget progress dashboardOverview screen✅Overspending categories highlighted in redBudget screen✅EXTRA 1: Savings Goals with progress trackingGoals screen✅EXTRA 2: Recurring/subscription managementSubscriptions✅Monthly recurring cost forecastSubscriptions✅Gamification badgesOverview screen✅Online storage (Supabase)All screens✅Expense sync to AirtableBackground✅
-
-
-
